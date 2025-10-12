@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bankingapp-deploy
+  labels:
+    app: bankingapp-deploy-lbl
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: banking-app
+  template:
+    metadata:
+      labels:
+        app: banking-app
+    spec:
+      containers:
+      - name: banking-app-container
+        image: loksaieta/bankingapp
+        ports:
+        - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: bankingapp-np-service
+  labels:
+    app: bankingapp-service-lbl
+spec:
+  selector:
+    app: bankingapp-deploy-lbl
+
+  type: NodePort
+  ports:
+  - nodePort: 31028
+    port: 8080
+    targetPort: 8080
