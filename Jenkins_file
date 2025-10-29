@@ -22,8 +22,6 @@ pipeline {
             steps {
                 echo 'Perform Application Image Build'
 				sh "docker build -t loksaieta/bankingwebapp:${BUILD_NUMBER} ."
-				sh 'docker image list'
-				sh "docker tag loksaieta/bankingwebapp:${BUILD_NUMBER} loksaieta/bankingwebapp:latest"
             }
         }
         stage('Login to DockerHub') {
@@ -36,7 +34,8 @@ pipeline {
         stage('Push to DockerHub') {
             steps {
                 echo 'Push Image to DockerHub'
-				sh "docker push loksaieta/bankingwebapp:latest"
+				sh "docker push loksaieta/bankingwebapp:${BUILD_NUMBER}"
+				sh "docker rmi loksaieta/bankingwebapp:${BUILD_NUMBER}"
             }
         }
         stage('Deploy to Kubernetes') {
