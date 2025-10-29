@@ -3,16 +3,16 @@ kind: Deployment
 metadata:
   name: bankingapp-deploy
   labels:
-    app: bankingapp-deploy-lbl
+    app: bankapp-eta-app
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: banking-app
+      app: bankapp-eta-app
   template:
     metadata:
       labels:
-        app: banking-app
+        app: bankapp-eta-app
     spec:
       containers:
       - name: banking-app-container
@@ -25,10 +25,10 @@ kind: Service
 metadata:
   name: bankingapp-np-service
   labels:
-    app: bankingapp-service-lbl
+    app: bankapp-eta-app
 spec:
   selector:
-    app: bankingapp-deploy-lbl
+    app: bankapp-eta-app
 
   type: NodePort
   ports:
