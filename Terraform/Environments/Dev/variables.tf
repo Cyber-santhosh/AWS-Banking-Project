@@ -6,6 +6,10 @@ variable "environment" {
   type = string
 }
 
+variable "aws_region" {
+  type = string
+}
+
 variable "vpc_cidr" {
   type = string
 }
@@ -26,14 +30,14 @@ variable "private_subnet_2_cidr" {
   type = string
 }
 
-variable "az1" {
+variable "ami_id" {
   type = string
 }
 
-variable "az2" {
+variable "key_name" {
   type = string
 }
 
-variable "aws_region" {
-  type = string
-}
+variable "az1" {}
+
+variable "az2" {}
