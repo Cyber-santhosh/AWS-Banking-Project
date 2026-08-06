@@ -106,3 +106,25 @@ module "jenkins_master" {
   project_name = var.project_name
   environment  = var.environment
 }
+
+module "jenkins_slave" {
+
+  source = "../../Modules/ec2"
+
+  instance_name = "jenkins-slave"
+
+  ami_id = var.ami_id
+
+  instance_type = "c7i-flex.large"
+
+  subnet_id = module.subnet.public_subnet_1_id
+
+  security_group_id = module.security_group.security_group_id
+
+  key_name = var.key_name
+
+  associate_public_ip = true
+
+  project_name = var.project_name
+  environment  = var.environment
+}
