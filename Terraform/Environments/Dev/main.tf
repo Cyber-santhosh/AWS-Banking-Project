@@ -128,3 +128,72 @@ module "jenkins_slave" {
   project_name = var.project_name
   environment  = var.environment
 }
+
+#########################################
+# K8s Master EC2
+#########################################
+module "K8s_master" {
+
+  source = "../../Modules/ec2"
+
+  instance_name = "K8s_Master"
+
+  ami_id = var.ami_id
+
+  instance_type = "t3.small"
+
+  subnet_id = module.subnet.public_subnet_1_id
+
+  security_group_id = module.security_group.security_group_id
+
+  key_name = var.key_name
+
+  associate_public_ip = true
+
+  project_name = var.project_name
+  environment  = var.environment
+}
+
+module "K8s_worker1" {
+
+  source = "../../Modules/ec2"
+
+  instance_name = "K8s_worker1"
+
+  ami_id = var.ami_id
+
+  instance_type = "c7i-flex.large"
+
+  subnet_id = module.subnet.public_subnet_1_id
+
+  security_group_id = module.security_group.security_group_id
+
+  key_name = var.key_name
+
+  associate_public_ip = true
+
+  project_name = var.project_name
+  environment  = var.environment
+}
+
+module "K8s_worker2" {
+
+  source = "../../Modules/ec2"
+
+  instance_name = "K8s_worker2"
+
+  ami_id = var.ami_id
+
+  instance_type = "c7i-flex.large"
+
+  subnet_id = module.subnet.public_subnet_1_id
+
+  security_group_id = module.security_group.security_group_id
+
+  key_name = var.key_name
+
+  associate_public_ip = true
+
+  project_name = var.project_name
+  environment  = var.environment
+}
