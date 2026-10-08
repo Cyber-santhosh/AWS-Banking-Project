@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: banking-app-container
-        image: santhosh5895/aws
+        image: santhosh5895/aws:v1.12
         ports:
         - containerPort: 8082
 ---
